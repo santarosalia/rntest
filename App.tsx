@@ -5,9 +5,10 @@
  * @format
  */
 
-import React from 'react';
+import React, { useRef } from 'react';
 import type {PropsWithChildren} from 'react';
 import {
+  Dimensions,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -24,7 +25,7 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-
+import {WebView} from 'react-native-webview';
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
@@ -60,11 +61,20 @@ function App(): React.JSX.Element {
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    flex: 1
   };
 
   return (
     <SafeAreaView style={backgroundStyle}>
-      <StatusBar
+      <WebView
+        style={{
+          flex: 1,
+          width: Dimensions.get('window').width,
+          height: Dimensions.get('window').height
+        }}
+        source={{uri: 'https://wd.digitalworker.co.kr'}}
+      ></WebView>
+      {/* <StatusBar
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={backgroundStyle.backgroundColor}
       />
@@ -91,7 +101,7 @@ function App(): React.JSX.Element {
           </Section>
           <LearnMoreLinks />
         </View>
-      </ScrollView>
+      </ScrollView> */}
     </SafeAreaView>
   );
 }
